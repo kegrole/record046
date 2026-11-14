@@ -1,0 +1,103 @@
+{
+  "files": [
+    {
+      "file": "demo/pe/bad_lfanew.exe",
+      "bits": null,
+      "machine": null,
+      "imports": {},
+      "sections": [],
+      "findings": [
+        "解析失败：e_lfanew (0x200) 指向处不是 PE 签名（实际为 b'\\x00\\x00\\x00\\x00'）"
+      ]
+    },
+    {
+      "file": "demo/pe/packed_upx.exe",
+      "bits": 32,
+      "machine": 332,
+      "imports": {},
+      "sections": [
+        {
+          "name": "UPX0",
+          "virtual_size": 12288,
+          "virtual_address": 4096,
+          "raw_size": 0
+        },
+        {
+          "name": "UPX1",
+          "virtual_size": 4096,
+          "virtual_address": 16384,
+          "raw_size": 512
+        }
+      ],
+      "findings": [
+        "疑似加壳：节名 UPX0、UPX1 是已知加壳器节名"
+      ]
+    },
+    {
+      "file": "demo/pe/pe32_imports.exe",
+      "bits": 32,
+      "machine": 332,
+      "imports": {
+        "kernel32.dll": {
+          "functions": [
+            "CreateFileW",
+            "ExitProcess"
+          ],
+          "original_first_thunk": 4176,
+          "first_thunk": 4192
+        },
+        "user32.dll": {
+          "functions": [
+            "MessageBoxW"
+          ],
+          "original_first_thunk": 4208,
+          "first_thunk": 4224
+        }
+      },
+      "sections": [
+        {
+          "name": ".idata",
+          "virtual_size": 512,
+          "virtual_address": 4096,
+          "raw_size": 512
+        },
+        {
+          "name": ".text",
+          "virtual_size": 256,
+          "virtual_address": 8192,
+          "raw_size": 512
+        }
+      ],
+      "findings": []
+    },
+    {
+      "file": "demo/pe/pe64_imports.exe",
+      "bits": 64,
+      "machine": 34404,
+      "imports": {
+        "kernel32.dll": {
+          "functions": [
+            "CreateFileA"
+          ],
+          "original_first_thunk": 4160,
+          "first_thunk": 4176
+        }
+      },
+      "sections": [
+        {
+          "name": ".idata",
+          "virtual_size": 512,
+          "virtual_address": 4096,
+          "raw_size": 512
+        },
+        {
+          "name": ".text",
+          "virtual_size": 256,
+          "virtual_address": 8192,
+          "raw_size": 512
+        }
+      ],
+      "findings": []
+    }
+  ]
+}
